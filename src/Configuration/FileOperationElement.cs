@@ -1,7 +1,7 @@
 ﻿namespace Johnson.ProfilePhotoHopper.Configuration {
 
 	[System.Serializable]
-	public sealed class FileOperationElement : System.Configuration.ConfigurationElement {
+	public sealed class FileOperationElement : System.Configuration.ConfigurationElement, INamedConfigurationElement {
 
 		#region .ctor
 		public FileOperationElement() : base() {

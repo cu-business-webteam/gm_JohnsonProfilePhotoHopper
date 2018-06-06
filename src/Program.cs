@@ -20,10 +20,11 @@ namespace Johnson.ProfilePhotoHopper {
 
 		public static System.Int32 Main( System.String[] args ) {
 			var pickupDir = args[ 0 ];
-			foreach ( var destination in Configuration.FileOperationSection.GetSection().FileOperations.OfType<Configuration.FileOperationElement>() ) {
+			var fileOpSection = Configuration.FileOperationSection.GetSection();
+			foreach ( var destination in fileOpSection.FileOperations.OfType<Configuration.FileOperationElement>() ) {
 				ProcessFiles( pickupDir, destination );
 			}
-			var defDrop = theAppSettings[ "DefaultDrop" ];
+			var defDrop = fileOpSection.Path;
 			foreach ( var file in System.IO.Directory.EnumerateFiles( pickupDir ) ) {
 				System.IO.File.Move( file, System.IO.Path.Combine( defDrop, System.IO.Path.GetFileName( file ) ) );
 			}
@@ -63,8 +64,13 @@ namespace Johnson.ProfilePhotoHopper {
 				inner => inner,
 				( x, y ) => x
 			);
+			System.String path = process.Path;
+			System.IO.Directory.CreateDirectory( path );
+			System.String destinationName = null;
 			foreach ( var file in fileList ) {
-				System.IO.File.Move( file.PathName, System.IO.Path.Combine( process.Path, file.Name ) );
+				destinationName = System.IO.Path.Combine( path, file.Name );
+				System.IO.File.Delete( destinationName );
+				System.IO.File.Move( file.PathName, destinationName );
 			};
 		}
 

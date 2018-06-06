@@ -17,7 +17,7 @@ namespace Johnson.ProfilePhotoHopper.Configuration {
 
 
 		#region properties
-		[System.Configuration.ConfigurationProperty( "fileOperations", IsDefaultCollection = true, IsRequired = false )]
+		[System.Configuration.ConfigurationProperty( "fileOperations", IsDefaultCollection = false, IsRequired = false )]
 		[System.Configuration.ConfigurationCollection( typeof( FileOperationElementCollection ),
 			AddItemName = "add",
 			ClearItemsName = "clear",
@@ -28,7 +28,7 @@ namespace Johnson.ProfilePhotoHopper.Configuration {
 				return (FileOperationElementCollection)base[ "fileOperations" ];
 			}
 		}
-
+	
 		[System.Configuration.ConfigurationProperty( "path", IsRequired = true, IsKey = false )]
 		public System.String Path {
 			get {
