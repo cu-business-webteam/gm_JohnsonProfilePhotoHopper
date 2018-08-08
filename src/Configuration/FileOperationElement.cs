@@ -20,24 +20,25 @@
 			}
 		}
 
-		[System.Configuration.ConfigurationProperty( "methodName", IsRequired = true, IsKey = false )]
-		public System.String MethodName {
+		[System.IO.IODescription( "The name of the Type which implements the IFileRecognizer interface." )]
+		[System.Configuration.ConfigurationProperty( "typeName", IsRequired = true, IsKey = false )]
+		public System.String TypeName {
 			get {
-				return (System.String)this[ "methodName" ];
+				return (System.String)this[ "typeName" ];
 			}
 			set {
-				this[ "methodName" ] = value;
+				this[ "typeName" ] = value;
 			}
 		}
 
-		[System.IO.IODescription( "The destination directory" )]
-		[System.Configuration.ConfigurationProperty( "path", IsRequired = true, IsKey = false )]
-		public System.String Path {
+		[System.IO.IODescription( "The assembly which exposes the named Type." )]
+		[System.Configuration.ConfigurationProperty( "assembly", IsRequired = true, IsKey = false )]
+		public System.String Assembly {
 			get {
-				return (System.String)this[ "path" ];
+				return (System.String)this[ "assembly" ];
 			}
 			set {
-				this[ "path" ] = value;
+				this[ "assembly" ] = value;
 			}
 		}
 		#endregion properties

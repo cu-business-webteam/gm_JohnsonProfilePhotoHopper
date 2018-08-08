@@ -28,7 +28,9 @@ namespace Johnson.ProfilePhotoHopper.Configuration {
 				return (FileOperationElementCollection)base[ "fileOperations" ];
 			}
 		}
-	
+
+		/// <summary>The default send-to destination.</summary>
+		[System.IO.IODescription( "The default send-to destination." )]
 		[System.Configuration.ConfigurationProperty( "path", IsRequired = true, IsKey = false )]
 		public System.String Path {
 			get {

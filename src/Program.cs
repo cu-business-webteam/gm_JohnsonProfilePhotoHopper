@@ -19,59 +19,34 @@ namespace Johnson.ProfilePhotoHopper {
 
 
 		public static System.Int32 Main( System.String[] args ) {
-			var pickupDir = args[ 0 ];
-			var fileOpSection = Configuration.FileOperationSection.GetSection();
-			foreach ( var destination in fileOpSection.FileOperations.OfType<Configuration.FileOperationElement>() ) {
-				ProcessFiles( pickupDir, destination );
+			var section = Configuration.FileOperationSection.GetSection();
+			var fileOperations = section.FileOperations.OfType<Configuration.FileOperationElement>();
+			System.Collections.Generic.ICollection<Johnson.ProfilePhotoRecognizer.IFileRecognizer> recognizers = new System.Collections.Generic.List<Johnson.ProfilePhotoRecognizer.IFileRecognizer>();
+			System.Reflection.Assembly asm = null;
+			foreach ( var fo in fileOperations ) {
+				asm = System.Reflection.Assembly.LoadFrom( fo.Assembly );
+				recognizers.Add( (Johnson.ProfilePhotoRecognizer.IFileRecognizer)System.Activator.CreateInstance( asm.GetType( fo.TypeName ) ) );
 			}
-			var defDrop = fileOpSection.Path;
-			foreach ( var file in System.IO.Directory.EnumerateFiles( pickupDir ) ) {
-				System.IO.File.Move( file, System.IO.Path.Combine( defDrop, System.IO.Path.GetFileName( file ) ) );
+
+			var pickupDir = args[ 0 ];
+			System.String dest = null;
+			foreach ( var filePathName in System.IO.Directory.GetFiles( pickupDir ) ) {
+				foreach ( var rec in recognizers ) {
+					dest = rec.IsRecognized( filePathName );
+					if ( !System.String.IsNullOrEmpty( dest ) ) {
+						System.IO.File.Copy( filePathName, dest, true );
+						System.IO.File.Delete( filePathName );
+						break;
+					}
+				}
+				if ( System.String.IsNullOrEmpty( dest ) ) {
+					dest = section.Path;
+					System.IO.File.Copy( filePathName, dest, true );
+					System.IO.File.Delete( filePathName );
+				}
 			}
 
 			return 0;
-		}
-
-		private static void ProcessFiles( System.String source, Configuration.FileOperationElement process ) {
-			var netIdExpression = theAppSettings[ "netIdExpression" ];
-			var regexName = theAppSettings[ "netIdExpressionName" ];
-
-			var methodInfo = theDbNetIdType.GetMethod( process.MethodName, new System.Type[ 0 ] );
-			var fileList = System.IO.Directory.EnumerateFiles( source ).Select(
-				x => new {
-					PathName = x,
-					Name = System.IO.Path.GetFileName( x ),
-					NameWithoutExtension = System.IO.Path.GetFileNameWithoutExtension( x )
-				}
-			).Where(
-				x => System.Text.RegularExpressions.Regex.IsMatch(
-					x.NameWithoutExtension, netIdExpression,
-					System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Singleline
-				)
-			).Select(
-				x => new {
-					PathName = x.PathName,
-					Name = x.Name,
-					NameWithoutExtension = x.NameWithoutExtension,
-					NetId = System.Text.RegularExpressions.Regex.Match(
-						x.NameWithoutExtension, netIdExpression,
-						System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Singleline
-					).Groups[ regexName ].Captures[ 0 ].Value
-				}
-			).Join(
-				(System.Collections.Generic.IEnumerable<System.String>)methodInfo.Invoke( null, null ),
-				outer => outer.NetId,
-				inner => inner,
-				( x, y ) => x
-			);
-			System.String path = process.Path;
-			System.IO.Directory.CreateDirectory( path );
-			System.String destinationName = null;
-			foreach ( var file in fileList ) {
-				destinationName = System.IO.Path.Combine( path, file.Name );
-				System.IO.File.Delete( destinationName );
-				System.IO.File.Move( file.PathName, destinationName );
-			};
 		}
 
 	}
