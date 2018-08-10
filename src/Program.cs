@@ -29,6 +29,7 @@ namespace Johnson.ProfilePhotoHopper {
 			}
 
 			var pickupDir = args[ 0 ];
+			var defDest = section.Path;
 			System.String dest = null;
 			foreach ( var filePathName in System.IO.Directory.GetFiles( pickupDir ) ) {
 				foreach ( var rec in recognizers ) {
@@ -40,8 +41,7 @@ namespace Johnson.ProfilePhotoHopper {
 					}
 				}
 				if ( System.String.IsNullOrEmpty( dest ) ) {
-					dest = section.Path;
-					System.IO.File.Copy( filePathName, dest, true );
+					System.IO.File.Copy( filePathName, defDest, true );
 					System.IO.File.Delete( filePathName );
 				}
 			}
