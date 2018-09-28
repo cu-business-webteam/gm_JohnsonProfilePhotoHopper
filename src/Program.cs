@@ -41,7 +41,7 @@ namespace Johnson.ProfilePhotoHopper {
 					}
 				}
 				if ( System.String.IsNullOrEmpty( dest ) ) {
-					System.IO.File.Copy( filePathName, defDest, true );
+					System.IO.File.Copy( filePathName, System.IO.Path.Combine( defDest, System.IO.Path.GetFileName( filePathName ) ), true );
 					System.IO.File.Delete( filePathName );
 				}
 			}
