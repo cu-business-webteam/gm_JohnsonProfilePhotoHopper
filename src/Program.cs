@@ -6,14 +6,12 @@ namespace Johnson.ProfilePhotoHopper {
 
 		#region fields
 		private static readonly System.Collections.Specialized.NameValueCollection theAppSettings;
-		private static readonly System.Type theDbNetIdType;
 		#endregion fields
 
 
 		#region .ctor
 		static Program() {
 			theAppSettings = System.Configuration.ConfigurationManager.AppSettings;
-			theDbNetIdType = typeof( DbNetId );
 		}
 		#endregion .ctor
 
@@ -29,7 +27,7 @@ namespace Johnson.ProfilePhotoHopper {
 			}
 
 			var pickupDir = args[ 0 ];
-			var defDest = section.Path;
+			var defDest = section.DefaultPath;
 			System.String dest = null;
 			foreach ( var filePathName in System.IO.Directory.GetFiles( pickupDir ) ) {
 				foreach ( var rec in recognizers ) {

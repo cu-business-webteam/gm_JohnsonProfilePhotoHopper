@@ -31,13 +31,13 @@ namespace Johnson.ProfilePhotoHopper.Configuration {
 
 		/// <summary>The default send-to destination.</summary>
 		[System.IO.IODescription( "The default send-to destination." )]
-		[System.Configuration.ConfigurationProperty( "path", IsRequired = true, IsKey = false )]
-		public System.String Path {
+		[System.Configuration.ConfigurationProperty( "defaultPath", IsRequired = true, IsKey = false )]
+		public System.String DefaultPath {
 			get {
-				return (System.String)this[ "path" ];
+				return (System.String)this[ "defaultPath" ];
 			}
 			set {
-				this[ "path" ] = value;
+				this[ "defaultPath" ] = value;
 			}
 		}
 		#endregion properties
