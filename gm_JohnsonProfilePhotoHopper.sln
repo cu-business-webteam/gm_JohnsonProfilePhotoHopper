@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gm_JohnsonProfilePhotoHoppe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gm_JohnsonProfilePhotoRecognizer", "..\gm_JohnsonProfilePhotoRecognizer\gm_JohnsonProfilePhotoRecognizer.csproj", "{144DEECC-FA48-4F1D-9ECD-5A485E95E5A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gm_JohnsonProfilePhotoRecognizer.ExecEd", "..\gm_JohnsonProfilePhotoRecognizer.ExecEd\gm_JohnsonProfilePhotoRecognizer.ExecEd.csproj", "{26030B48-E98D-4720-95B2-83B341F098A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Release|Any CPU = Release|Any CPU
@@ -21,6 +23,10 @@ Global
 		{144DEECC-FA48-4F1D-9ECD-5A485E95E5A5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{144DEECC-FA48-4F1D-9ECD-5A485E95E5A5}.Training|Any CPU.ActiveCfg = Release|Any CPU
 		{144DEECC-FA48-4F1D-9ECD-5A485E95E5A5}.Training|Any CPU.Build.0 = Release|Any CPU
+		{26030B48-E98D-4720-95B2-83B341F098A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26030B48-E98D-4720-95B2-83B341F098A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26030B48-E98D-4720-95B2-83B341F098A8}.Training|Any CPU.ActiveCfg = Training|Any CPU
+		{26030B48-E98D-4720-95B2-83B341F098A8}.Training|Any CPU.Build.0 = Training|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
