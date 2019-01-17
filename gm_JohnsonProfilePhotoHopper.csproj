@@ -77,11 +77,11 @@
     </None>
     <None Include="App.Release.config">
       <DependentUpon>App.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
+      <IsTransformFile>true</IsTransformFile>
     </None>
     <None Include="App.Training.config">
       <DependentUpon>App.config</DependentUpon>
-      <IsTransformFile>True</IsTransformFile>
+      <IsTransformFile>true</IsTransformFile>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
