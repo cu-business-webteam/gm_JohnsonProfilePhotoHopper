@@ -90,6 +90,10 @@
       <Project>{26030b48-e98d-4720-95b2-83b341f098a8}</Project>
       <Name>gm_JohnsonProfilePhotoRecognizer.ExecEd</Name>
     </ProjectReference>
+    <ProjectReference Include="..\gm_JohnsonProfilePhotoRecognizer.JgsmFaculty\JgsmFacultyRecognizer.csproj">
+      <Project>{89b174b0-3302-4c14-9042-1dd93d89f999}</Project>
+      <Name>JgsmFacultyRecognizer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\gm_JohnsonProfilePhotoRecognizer\gm_JohnsonProfilePhotoRecognizer.csproj">
       <Project>{144deecc-fa48-4f1d-9ecd-5a485e95e5a5}</Project>
       <Name>gm_JohnsonProfilePhotoRecognizer</Name>
